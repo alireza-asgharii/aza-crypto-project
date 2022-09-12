@@ -1,0 +1,17 @@
+.navbarSearch {
+  background: #171924;
+  outline: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.648);
+  
+  
+  &:focus {
+    background: #171924;
+    color: rgba(255, 255, 255, 0.648);
+    box-shadow: none;
+  }
+}
+
+.navbarHam:focus {
+  box-shadow: none;
+}
