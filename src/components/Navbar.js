@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 // styles
 import styles from "../styles/navbar.module.scss";
@@ -33,7 +32,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/Cryptocurrencies">
+                <Link className="nav-link" to="/cryptocurrencies">
                   Cryptocurrencies
                 </Link>
               </li>
