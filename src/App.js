@@ -1,11 +1,18 @@
-import './App.css';
-import Navbar from './components/Navbar';
+import "./App.css";
+import Main from "./components/Main";
+import Navbar from "./components/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
+//ContextProvider
+import MarketCoinContextProvider from "./context/MarketCoinContextProvider";
 
 function App() {
   return (
-    <div>
+    <MarketCoinContextProvider>
       <Navbar />
-    </div>
+      <Main />
+    </MarketCoinContextProvider>
   );
 }
 
