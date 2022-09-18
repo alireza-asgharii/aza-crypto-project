@@ -12,13 +12,16 @@ import { RiArrowUpSFill, RiArrowDownSFill } from "react-icons/ri";
 import { MarketCoinContext } from "../context/MarketCoinContextProvider";
 
 //Helper
-import { splitForLink, splitName, toFixed, upDown } from "../helper/function";
+import { splitName, toFixed, upDown } from "../helper/function";
 
 // Chartjs
 import Chart7d from "./shared/Chart7d";
 
 //Components
 import PaginationCom from "./shared/PaginationCom";
+
+//Skeleton Lading
+import TableSkeleton from "../loading/TableSkeleton";
 
 const Home = () => {
   const { data } = useContext(MarketCoinContext);
@@ -48,7 +51,10 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((coin) => (
+              {
+              data.length === 0 ? <TableSkeleton length={10} /> :
+              
+              data.map((coin) => (
                 <tr className={styles.coinRow} key={coin.id}>
                   <td className={styles.sticky}>
                     <AiOutlineStar className={styles.star} />
@@ -58,7 +64,7 @@ const Home = () => {
                   </td>
                   <td className={`${styles.sticky} ${styles.nameTd}`}>
                     <img src={coin.image} alt="logo" loading="lazy" />
-                    <Link to={`/currencies/${(splitForLink(coin.name)).toLowerCase()}`} className={styles.div}>
+                    <Link to={`/currencies/${coin.id}`} className={styles.div}>
                       <span className={styles.nameSpan}>
                         {splitName(coin.name)}
                       </span>
@@ -117,12 +123,12 @@ const Home = () => {
                   <td>${coin.market_cap.toLocaleString()}</td>
                   <td>{`${coin.circulating_supply.toLocaleString()} ${coin.symbol.toUpperCase()}`}</td>
                   <td>
-                    <Chart7d
+                    {/* <Chart7d
                       data={coin}
                       upDown={upDown(
                         coin.price_change_percentage_7d_in_currency
                       )}
-                    />
+                    /> */}
                   </td>
                   <td></td>
                 </tr>
