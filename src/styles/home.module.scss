@@ -30,6 +30,10 @@
     font-size: 0.8rem;
     background: rgb(23, 23, 26);
 
+    @media screen and (min-width: 660px) {
+      font-size: .9rem;
+    }
+
     &:nth-child(1) {
       position: sticky;
       left: 0px;
@@ -67,6 +71,9 @@
     padding: 10px 11px;
     font-size: 0.9rem;
     background: inherit;
+    @media screen and (min-width: 660px) {
+      font-size: 1rem;
+    }
 
     &:nth-child(11) {
       padding: 0;
@@ -88,6 +95,7 @@
 
     .star {
       font-size: 1.2rem;
+      color: #797d91;
       @media screen and (min-width: 760px) {
         cursor: pointer;
       }
@@ -136,6 +144,10 @@
     color: #ffffff;
     .nameSpan {
       font-size: 0.9rem;
+      @media screen and (min-width: 660px) {
+        font-size: 1rem;
+      }
+      
       @media screen and (min-width: 760px) {
         padding-right: 10px;
       }
