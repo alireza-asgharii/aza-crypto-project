@@ -30,7 +30,7 @@ const MarketCoinContextProvider = ({ children }) => {
   }, [number]);
 
   return (
-    <MarketCoinContext.Provider value={{ data, setData, setNumber }}>
+    <MarketCoinContext.Provider value={{ data, setData }}>
       {children}
     </MarketCoinContext.Provider>
   );
