@@ -9,7 +9,6 @@ import axios from "axios";
 axios.defaults.baseURL = 'https://api.coingecko.com';
 
 axios.interceptors.response.use((response) => {
-  console.log(response)
   return response.data;
 })
 
