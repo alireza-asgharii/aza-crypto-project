@@ -8,3 +8,15 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom, #17171a, #17171a);
 }
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #17171a;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(65, 62, 62, 0.695);
+}
