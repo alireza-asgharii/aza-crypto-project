@@ -123,12 +123,12 @@ const Home = () => {
                   <td>${coin.market_cap.toLocaleString()}</td>
                   <td>{`${coin.circulating_supply.toLocaleString()} ${coin.symbol.toUpperCase()}`}</td>
                   <td>
-                    {/* <Chart7d
+                    <Chart7d
                       data={coin}
                       upDown={upDown(
                         coin.price_change_percentage_7d_in_currency
                       )}
-                    /> */}
+                    />
                   </td>
                   <td></td>
                 </tr>
