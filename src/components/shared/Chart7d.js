@@ -22,24 +22,20 @@ ChartJS.register(
   Legend
 );
 
-
-
 const Chart7d = ({ data, upDown }) => {
   const [src, setSrc] = useState("");
 
-    setTimeout(() => {
-      const canvas = document.querySelector(`#canvas${data.name.split(" ")[0]}`);
-      if (canvas) {
-        const img = canvas.toDataURL("image/png");
-        setSrc(img);
-      }
-    }, 500);
-    
-    
+  setTimeout(() => {
+    const canvas = document.querySelector(`#canvas${data.name.split(" ")[0]}`);
+    if (canvas) {
+      const img = canvas.toDataURL("image/png");
+      setSrc(img);
+    }
+  }, 500);
 
   return (
     <>
-      {src && <img src={src} alt="chart" width={170} height='100%' />}
+      {src && <img src={src} alt="chart" width={170} height="100%" />}
 
       <Line
         style={{ display: "none" }}
@@ -61,10 +57,10 @@ const Chart7d = ({ data, upDown }) => {
               pointBackgroundColor: "",
 
               //pointSizeHover
-              pointHitRadius: 4,
+              pointHitRadius: 0,
 
               //sizePoint
-              pointRadius: 0.1,
+              pointRadius: 0,
 
               pointStyle: "cross",
             },
@@ -73,6 +69,7 @@ const Chart7d = ({ data, upDown }) => {
         width={300}
         height={400}
         options={{
+          animation: false,
           maintainAspectRatio: false,
           responsive: true,
           backdropPadding: 10,
@@ -80,28 +77,40 @@ const Chart7d = ({ data, upDown }) => {
           hitRadius: 30,
           hoverRadius: 12,
           plugins: {
+            decimation: {
+              enabled: true
+            },
             legend: {
               display: false,
             },
           },
 
           scales: {
-            xAxes: { display: false },
+            xAxes: {
+              display: false,
+
+              grid: {
+                display: false,
+              },
+            },
             yAxes: {
               display: false,
-              ticks: {
-                min: Math.min
-                  .apply(null, data.sparkline_in_7d.price)
-                  .toFixed(2)
-                  .toLocaleString(),
-                max: Math.max
-                  .apply(null, data.sparkline_in_7d.price)
-                  .toFixed(2)
-                  .toLocaleString(),
-                callback: function (val, index) {
-                  return `$${val}`;
-                },
+              grid: {
+                display: false,
               },
+              // ticks: {
+              //   min: Math.min
+              //     .apply(null, data.sparkline_in_7d.price)
+              //     .toFixed(2)
+              //     .toLocaleString(),
+              //   max: Math.max
+              //     .apply(null, data.sparkline_in_7d.price)
+              //     .toFixed(2)
+              //     .toLocaleString(),
+              //   callback: function (val, index) {
+              //     return `$${val}`;
+              //   },
+              // },
             },
           },
         }}
