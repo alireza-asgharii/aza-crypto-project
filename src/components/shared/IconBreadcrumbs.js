@@ -1,0 +1,67 @@
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { Link } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import GrainIcon from "@mui/icons-material/Grain";
+import { styled } from "@mui/material/styles";
+import { Skeleton } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+
+const CustomizedLink = styled(Link)`
+  color: #84a7bb;
+  text-decoration: none;
+
+  @media screen and (min-width: 560px) {
+    cursor: pointer;
+  }
+
+  :hover {
+    color: #84a7bb;
+    text-decoration: underline;
+  }
+`;
+
+export default function IconBreadcrumbs({ path, name }) {
+  const splitPath = path.pathname.split("/");
+
+  return (
+    <div role="presentation">
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        sx={{ color: "white" }}
+        separator={<NavigateNextIcon fontSize="small" />}
+      >
+        <CustomizedLink
+          underline="hover"
+          sx={{ display: "flex", alignItems: "center" }}
+          to="/"
+        >
+          <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+          Home
+        </CustomizedLink>
+        <CustomizedLink
+          underline="hover"
+          sx={{ display: "flex", alignItems: "center" }}
+          to={`/${splitPath[1]}`}
+        >
+          <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+          {splitPath[1]}
+        </CustomizedLink>
+        <Typography sx={{ display: "flex", alignItems: "center" }}>
+          <MonetizationOnOutlinedIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+          {name ? (
+            name
+          ) : (
+            <Skeleton
+              variant="rounded"
+              width={60}
+              height={15}
+              sx={{ bgcolor: "grey.900" }}
+            />
+          )}
+        </Typography>
+      </Breadcrumbs>
+    </div>
+  );
+}

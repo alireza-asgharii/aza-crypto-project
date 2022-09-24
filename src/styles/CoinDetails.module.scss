@@ -1,0 +1,499 @@
+.breadcrumbsContainer {
+  padding: 30px 0;
+}
+
+.badge {
+  padding: 4px 7px;
+  background: #292d33;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.topSection {
+  @media screen and (min-width: 1000px) {
+    display: flex;
+    align-items: center;
+    .priceContainer {
+      flex: 80;
+      margin-right: 40px;
+    }
+
+    .infoContainer {
+      flex: 30;
+    }
+  }
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  margin: 15px 0 5px;
+
+  .name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    @media screen and (min-width: 560px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  img {
+    width: 31px;
+    margin-right: 10px;
+    @media screen and (min-width: 560px) {
+      width: 33px;
+    }
+  }
+}
+
+.priceDiv {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 13px;
+
+  .price {
+    margin-right: 10px;
+  }
+
+  .change {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+  }
+
+  .upColor {
+    color: #16c784;
+  }
+
+  .lowColor {
+    color: #ea3943;
+  }
+}
+
+.addStar {
+  border: 1px solid #404040;
+  border-radius: 6px;
+  width: 50px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all ease 0.3s;
+
+  @media screen and (min-width: 560px) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: #2a2a2a;
+  }
+}
+
+.morePrice {
+  padding-top: 20px;
+  display: grid;
+
+  @media screen and (min-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+
+    .priceItem:nth-child(even) {
+      margin-left: 20px;
+    }
+  }
+
+  .priceItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #404040ac;
+    padding: 11px 0;
+    font-size: 0.85rem;
+
+    @media screen and (min-width: 560px) {
+      font-size: 0.9rem;
+    }
+
+    p {
+      margin: 0;
+      // color: #c0c0b7;
+      color: #858ca2;
+
+      span {
+        margin-left: 6px;
+        position: relative;
+
+        .tooltip {
+          position: absolute;
+          left: -84px;
+          bottom: 27px;
+          min-width: 310px;
+          background: #222531;
+          padding: 15px 10px;
+          z-index: 2;
+          border-radius: 7px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(3px);
+          display: inline-block;
+
+          @media screen and (max-width: 260px) {
+            min-width: fit-content;
+            height: 200px;
+            overflow-y: scroll;
+          }
+
+          @media screen and (min-width: 560px) {
+            min-width: 400px;
+          }
+
+          &::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-style: solid;
+            border-width: 10px;
+            height: 10px;
+            border-color: #222531 transparent transparent transparent;
+            position: absolute;
+            bottom: -19px;
+            left: 75px;
+          }
+        }
+
+        .showTooltip {
+          animation: showTooltip ease 0.3s forwards;
+        }
+
+        @keyframes showTooltip {
+          0% {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(3px);
+          }
+          100% {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+
+    .priceSpan {
+      font-weight: bold;
+    }
+  }
+}
+
+.infoContainer {
+  margin-top: 30px;
+
+  h6 {
+    font-size: 1.6rem;
+    padding-bottom: 10px;
+  }
+
+  .itemInfoSkeleton {
+    align-items: center;
+  }
+
+  .itemInfo {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      flex: 70;
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+
+      &.moreLinkContainer {
+        display: flex;
+        align-items: center;
+
+        a {
+          border-radius: 7px 0 0 7px;
+          margin-right: 0;
+        }
+
+        .moreIcon {
+          background: #464a50c4;
+          width: 30px;
+          height: 32px;
+          border-radius: 0 7px 7px 0;
+          user-select: none;
+          @media screen and (min-width: 560px) {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .explorlinkContainer {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        min-width: 200px;
+        max-height: 200px;
+        overflow-y: auto;
+        background: #292d33;
+        z-index: 10;
+        top: 40px;
+        left: -60px;
+        border-radius: 7px;
+        padding: 4px 5px;
+
+        a {
+          padding: 3px 0;
+        }
+
+        &::-webkit-scrollbar {
+          border: 2px solid rgba(255, 255, 255, 0.529);
+          width: 5px;
+          border-radius: 7px;
+        }
+      }
+    }
+
+    > span {
+      flex: 30;
+    }
+
+    .coinLink {
+      text-decoration: none;
+      color: #fff;
+      margin: 2px 2px;
+      font-size: 1rem;
+    }
+
+    .skeletonSpan {
+      margin: 5px 0;
+    }
+
+    .socialBadge {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .socialIcon {
+        font-size: 1.2rem;
+        margin-right: 2px;
+      }
+      .copyIcon {
+        font-size: 1.2rem;
+        margin-left: 2px;
+
+        @media screen and (min-width: 560px) {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+//Bottom Container (CHART)
+.bottomContainer {
+  margin-top: 30px;
+
+  @media screen and (min-width: 999px) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    .chartContainer {
+      flex: 60;
+    }
+    .coinPrice {
+      flex: 30;
+      margin-left: 20px;
+    }
+  }
+
+  .titleChart {
+    font-size: 1.4rem;
+    padding: 20px 0;
+    font-weight: bold;
+
+    @media screen and (max-width: 260px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  .chart {
+    position: relative;
+    .loaderContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      h6 {
+        width: 100px;
+      }
+
+      .loader {
+        width: 40px;
+        border-radius: 50%;
+        height: 40px;
+        border: 1px solid rgb(75, 74, 74);
+        border-top: 3px solid rgb(170, 167, 167);
+        border-left: 3px solid rgb(170, 167, 167);
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      }
+
+      .errorMsg {
+        color: #ea3943;
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .buttonContainer {
+    background: #323546;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: fit-content;
+    margin-bottom: 30px;
+    padding: 5px 3px;
+
+    span {
+      padding: 6px 12px;
+      border-radius: 10px;
+      display: inline-block;
+      user-select: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.612);
+
+      @media screen and (min-width: 560px) {
+        font-size: 0.9rem;
+      }
+
+      &:hover {
+        background: #171924;
+      }
+
+      &.selected {
+        background: #171924;
+      }
+
+      @media screen and (min-width: 560px) {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .coinPrice {
+    background: #222531;
+    margin-top: 20px;
+    padding: 20px 15px;
+    border-radius: 10px;
+
+    .title {
+      font-size: 1.3rem;
+      padding-bottom: 6px;
+    }
+    .name {
+      font-size: 0.9rem;
+      color: #858ca2;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #8f95a732;
+      font-size: 0.9rem;
+
+      @media screen and (min-width: 560px) {
+        font-size: 1rem;
+      }
+
+      &.item:last-child {
+        border-bottom: none;
+      }
+
+      .nameItem {
+        color: #858ca2;
+        font-weight: 500;
+      }
+
+      .priceitem {
+        font-weight: 500;
+      }
+
+      .changePercentage {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .change {
+          margin-left: 6px;
+        }
+      }
+      .timeChange {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.changeRed {
+  color: #ea3943;
+}
+
+.changeGreen {
+  color: #16c784;
+}
+
+.descriptionContainer {
+  margin-top: 50px;
+
+  .text {
+    color: #99a8bd;
+    font-size: 0.9rem;
+
+    @media screen and (min-width: 560px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  & > .title {
+    font-size: 1.5rem;
+    color: #fff;
+    padding-bottom: 14px;
+    font-weight: bold;
+  }
+
+  .item {
+    .title {
+      font-size: 1.3rem;
+      color: #bbbec9;
+      padding-bottom: 4px;
+
+      @media screen and (min-width: 560px) {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
