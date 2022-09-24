@@ -1,6 +1,5 @@
 .container {
   background: linear-gradient(to bottom, rgb(23, 23, 26), rgb(23, 23, 26) 95%);
-  padding: 0 15px;
 }
 
 .homeTitle {
@@ -61,11 +60,6 @@
     }
     &:nth-child(11) {
       min-width: 170px;
-
-      @media screen and (min-width: 100px) {
-        // padding-right: 30px;
-      }
-     
     }
   }
 
