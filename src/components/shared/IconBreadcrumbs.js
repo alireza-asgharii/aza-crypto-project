@@ -7,6 +7,8 @@ import GrainIcon from "@mui/icons-material/Grain";
 import { styled } from "@mui/material/styles";
 import { Skeleton } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useContext } from "react";
+import { LoadingBarRef } from "../../App";
 
 const CustomizedLink = styled(Link)`
   color: #84a7bb;
@@ -24,6 +26,7 @@ const CustomizedLink = styled(Link)`
 
 export default function IconBreadcrumbs({ path, name }) {
   const splitPath = path.pathname.split("/");
+  const ref = useContext(LoadingBarRef);
 
   return (
     <div role="presentation">
@@ -33,6 +36,7 @@ export default function IconBreadcrumbs({ path, name }) {
         separator={<NavigateNextIcon fontSize="small" />}
       >
         <CustomizedLink
+          onClick={() => ref.current.continuousStart()}
           underline="hover"
           sx={{ display: "flex", alignItems: "center" }}
           to="/"
@@ -41,6 +45,7 @@ export default function IconBreadcrumbs({ path, name }) {
           Home
         </CustomizedLink>
         <CustomizedLink
+          onClick={() => ref.current.continuousStart()}
           underline="hover"
           sx={{ display: "flex", alignItems: "center" }}
           to={`/${splitPath[1]}`}

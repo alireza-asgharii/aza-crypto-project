@@ -12,16 +12,12 @@ import Navbar from "./components/Navbar";
 //ContextProvider
 import MarketCoinContextProvider from "./context/MarketCoinContextProvider";
 import MarkedContextProvider from "./context/MarkedContextProvider";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 export const LoadingBarRef = React.createContext();
 
 function App() {
   const ref = useRef(null);
-
-  useEffect(() => {
-    ref.current.complete();
-  });
 
   return (
     <div>

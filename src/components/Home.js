@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 //styles
 import styles from "../styles/home.module.scss";
 
 //Context
 import { MarketCoinContext } from "../context/MarketCoinContextProvider";
+import { LoadingBarRef } from "../App";
 
 //Components
 import PaginationCom from "./shared/PaginationCom";
@@ -15,6 +16,12 @@ import CoinTr from "./shared/CoinTr";
 
 const Home = () => {
   const { data } = useContext(MarketCoinContext);
+  const ref = useContext(LoadingBarRef)
+  useEffect(() => {
+    ref.current.complete()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
   return (
     <>
       <div className={styles.container}>
