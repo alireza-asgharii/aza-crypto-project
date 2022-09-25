@@ -5,7 +5,6 @@ import store from "./redux/store";
 import LoadingBar from "react-top-loading-bar";
 
 //Components
-import Loading from "./components/shared/Loading";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 
@@ -26,7 +25,6 @@ function App() {
         <MarketCoinContextProvider>
           <Provider store={store}>
             <MarkedContextProvider>
-              <Loading />
               <Navbar />
               <Main />
             </MarkedContextProvider>
