@@ -76,7 +76,7 @@
     font-size: 0.9rem;
     background: inherit;
     @media screen and (min-width: 660px) {
-      font-size: 1rem;
+      // font-size: 1rem;
     }
 
     &:nth-child(11) {
@@ -96,7 +96,13 @@
     }
 
     
-
+    .starYellow {
+      font-size: 1.2rem;
+      color: #ffd000;
+      @media screen and (min-width: 760px) {
+        cursor: pointer;
+      }
+    }
     .star {
       font-size: 1.2rem;
       color: #797d91;

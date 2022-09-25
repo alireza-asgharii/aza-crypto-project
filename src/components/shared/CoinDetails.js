@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -25,10 +25,12 @@ import { MdContentCopy } from "react-icons/md";
 import { MdOutlineDone } from "react-icons/md";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { RiArrowUpSFill } from "react-icons/ri";
+import { AiFillStar } from "react-icons/ai";
 
 //Function
 import {
   changePercentage,
+  checkStar,
   findAllMinMax,
   findMinMax,
   getTime,
@@ -46,8 +48,11 @@ import { Skeleton } from "@mui/material";
 //Chartjs
 import ChartCoin from "./ChartCoin";
 import axios from "axios";
+import { MarkedContext } from "../../context/MarkedContextProvider";
 
 const CoinDetails = () => {
+  const { state, dispatch } = useContext(MarkedContext);
+
   const [isOpenExplor, setExplor] = useState(false);
   const [isCopy, setCopy] = useState(false);
   const [range, setRange] = useState(1);
@@ -66,11 +71,9 @@ const CoinDetails = () => {
   //newData
   const [coinData, setCoinData] = useState([]);
 
-
   //for MaxMin
   const [dataMaxMin, setDataMaxMin] = useState([]);
   const [minMaxLaoding, seMaxMinLoading] = useState(true);
-  
 
   const { id } = useParams();
   const path = useLocation();
@@ -170,9 +173,31 @@ const CoinDetails = () => {
                 </span>
               </span>
             </div>
-            <span className={styles.addStar}>
-              <AiOutlineStar className={styles.starIcon} />
-            </span>
+            {checkStar(state.markeds, coinData.id) ? (
+              <span
+                className={styles.addStar}
+                onClick={() => {
+                  dispatch({
+                    type: "DELETE_FROM_MARKEDS",
+                    payload: coinData.id,
+                  });
+                }}
+              >
+                <AiFillStar className={styles.starYellow} />
+              </span>
+            ) : (
+              <span
+                className={styles.addStar}
+                onClick={() =>
+                  dispatch({
+                    type: "ADD_TO_MARKEDS",
+                    payload: coinData.id,
+                  })
+                }
+              >
+                <AiOutlineStar className={styles.star} />
+              </span>
+            )}
             <div className={styles.morePrice}>
               <div className={styles.priceItem}>
                 <p>
@@ -898,10 +923,10 @@ const CoinDetails = () => {
             trading volume of $
             {toLocaleS(coinData.market_data.total_volume.usd)} .{" "}
             {coinData.symbol.toUpperCase()} price is down{" "}
-            {coinData.market_data.price_change_percentage_24h}% in
-            the last 24 hours. It has a circulating supply of 19 Million BTC
-            coins and a total supply of{" "}
-            {toLocaleS(coinData.market_data.circulating_supply)} .
+            {coinData.market_data.price_change_percentage_24h}% in the last 24
+            hours. It has a circulating supply of 19 Million BTC coins and a
+            total supply of {toLocaleS(coinData.market_data.circulating_supply)}{" "}
+            .
           </p>
           <div className={styles.item}>
             <h6 className={styles.title}>

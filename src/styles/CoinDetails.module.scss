@@ -73,6 +73,8 @@
   }
 }
 
+
+
 .addStar {
   border: 1px solid #404040;
   border-radius: 6px;
@@ -90,6 +92,10 @@
 
   &:hover {
     background: #2a2a2a;
+  }
+
+  .starYellow {
+    color: #ffd000;
   }
 }
 
