@@ -7,13 +7,16 @@ import store from "./redux/store";
 
 //ContextProvider
 import MarketCoinContextProvider from "./context/MarketCoinContextProvider";
+import MarkedContextProvider from "./context/MarkedContextProvider";
 
 function App() {
   return (
     <MarketCoinContextProvider>
       <Provider store={store}>
-        <Navbar />
-        <Main />
+        <MarkedContextProvider>
+          <Navbar />
+          <Main />
+        </MarkedContextProvider>
       </Provider>
     </MarketCoinContextProvider>
   );
