@@ -86,17 +86,22 @@ const getTime = (time) => {
 };
 
 const splitTime = (time) => {
-  const splited = time.split(' ');
-  return `${splited[0]} ${splited[1]} ${splited[2]} ${splited[3]}`
-}
+  const splited = time.split(" ");
+  return `${splited[0]} ${splited[1]} ${splited[2]} ${splited[3]}`;
+};
 
 const checkEmpty = (value) => {
   if (value === null) {
-    return '-'
+    return "-";
   } else {
-    return value
+    return value;
   }
-}
+};
+
+const checkStar = (arr, id) => {
+  const find = arr.find((item) => item === id);
+  return find;
+};
 
 export {
   toFixed,
@@ -111,5 +116,5 @@ export {
   getTime,
   splitTime,
   checkEmpty,
-  
+  checkStar,
 };
