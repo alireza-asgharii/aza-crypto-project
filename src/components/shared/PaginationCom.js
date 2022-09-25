@@ -11,12 +11,12 @@ const PaginationCom = ({ page }) => {
   
   const location = useLocation();
   const query = queryString.parse(location.search);
-  document.documentElement.scrollTop = 1;
-
+  
   const [nPage, setNPage] = useState(+query.page)
-
+  
   useEffect(() => {
-      setNPage(+query.page)
+    setNPage(+query.page)
+    document.documentElement.scrollTop = 1;
   }, [query.page])
 
 
