@@ -52,10 +52,12 @@ const toLocaleS = (value) => {
 
 const splitWebsiteLink = (value) => {
   const splited = value.split("/")[2];
-  if (splited.includes("www.")) {
-    return value.split("/")[2].split("www.")[1];
-  } else {
-    return splited;
+  if (splited !== undefined) {
+    if (splited.includes("www.")) {
+      return value.split("/")[2].split("www.")[1];
+    } else {
+      return splited;
+    }
   }
 };
 
