@@ -48,10 +48,14 @@ import { Skeleton } from "@mui/material";
 //Chartjs
 import ChartCoin from "./ChartCoin";
 import axios from "axios";
+
+//Context
 import { MarkedContext } from "../../context/MarkedContextProvider";
+import { LoadingBarRef } from "../../App";
 
 const CoinDetails = () => {
   const { state, dispatch } = useContext(MarkedContext);
+  const ref = useContext(LoadingBarRef)
 
   const [isOpenExplor, setExplor] = useState(false);
   const [isCopy, setCopy] = useState(false);
@@ -83,8 +87,10 @@ const CoinDetails = () => {
     const get = async () => {
       setCoinData(await fetchCoinData(id));
       setCoinLoading(false);
+      ref.current.complete()
     };
     get();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {

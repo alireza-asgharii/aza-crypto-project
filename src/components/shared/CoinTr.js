@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styles from "../../styles/home.module.scss";
+import { Link } from "react-router-dom";
 
 //icons
 import { AiOutlineStar } from "react-icons/ai";
@@ -12,11 +13,14 @@ import { checkStar, splitName, toFixed, upDown } from "../../helper/function";
 // Chartjs
 import Chart7d from ".//Chart7d";
 
+//Context
 import { MarkedContext } from "../../context/MarkedContextProvider";
-import { Link } from "react-router-dom";
+import { LoadingBarRef } from "../../App";
+
 
 const CoinTr = ({ coin }) => {
   const { state, dispatch } = useContext(MarkedContext);
+  const ref = useContext(LoadingBarRef)
   return (
     <tr className={styles.coinRow}>
       <td className={styles.sticky}>
@@ -47,7 +51,7 @@ const CoinTr = ({ coin }) => {
       </td>
       <td className={`${styles.sticky} ${styles.nameTd}`}>
         <img src={coin.image} alt="logo" loading="lazy" />
-        <Link to={`/currencies/${coin.id}`} className={styles.div}>
+        <Link to={`/currencies/${coin.id}`} className={styles.div} onClick={() => ref.current.continuousStart()}>
           <span className={styles.nameSpan}>{splitName(coin.name)}</span>
           <span>
             <span className={styles.numberMobile}>{coin.market_cap_rank}</span>
