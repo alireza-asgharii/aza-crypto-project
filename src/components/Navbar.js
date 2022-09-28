@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+import { useDispatch, useSelector } from "react-redux";
+import { searchCoin } from "../redux/search/searchAction";
 
 // styles
 import styles from "../styles/navbar.module.scss";
 
 //icons
 import { BsCoin } from "react-icons/bs";
+import { FiSearch } from "react-icons/fi";
+import SearchItem from "./shared/SearchItem";
+import { MdLocalFireDepartment } from "react-icons/md";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const searchState = useSelector((state) => state.searchState);
+  const [isShow, setIsShow] = useState(false);
+  const [trandData, setTrandData] = useState({
+    data: [],
+    isLoadingTranding: true,
+    err: "",
+  });
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("https://api.coingecko.com/api/v3/search/trending")
+      .then((res) =>
+        setTrandData({ ...trandData, data: res, isLoadingTranding: false })
+      )
+      .catch((err) =>
+        setTrandData({
+          data: [],
+          err: err,
+          isLoadingTranding: false,
+        })
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const changeHandler = (e) => {
+    dispatch(searchCoin(e.target.value));
+    setInputValue(e.target.value);
+  };
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -42,16 +79,43 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
+            <label className={styles.searchLabel}>
+              <FiSearch className={styles.searhIcon} />
               <input
                 className={`form-control me-2 ${styles.navbarSearch}`}
                 type="text"
                 placeholder="Search"
+                onChange={changeHandler}
+                onFocus={() => setIsShow(true)}
+                onBlur={() => setTimeout(() => setIsShow(false), 200)}
               />
-              <button className="btn btn-primary" type="button">
-                Search
-              </button>
-            </form>
+
+              {inputValue === "" && isShow && !trandData.isLoadingTranding && (
+                <div className={styles.searchItemContainer}>
+                  <div className={styles.trandigContainer}>
+                    <h6>Tranding</h6>
+                    <MdLocalFireDepartment className={styles.fireIcon} />
+                  </div>
+                  {trandData.data.coins.map((coin) => (
+                    <SearchItem key={coin.item.id} data={coin.item} />
+                  ))}
+                </div>
+              )}
+
+              {searchState.data.length === 0
+                ? null
+                : isShow &&
+                  inputValue !== "" && (
+                    <div className={styles.searchItemContainer}>
+                      <div className={styles.trandigContainer}>
+                        <h6>Cryptoassets</h6>
+                      </div>
+                      {searchState.data.coins.map((item) => (
+                        <SearchItem key={item.id} data={item} />
+                      ))}
+                    </div>
+                  )}
+            </label>
           </div>
         </div>
       </nav>

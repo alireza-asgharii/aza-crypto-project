@@ -1,17 +1,110 @@
-.navbarSearch {
+.searchLabel {
+  display: flex;
+  align-items: center;
   background: #171924;
-  outline: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.648);
+  border-radius: 7px;
+  padding: 0 10px;
+  position: relative;
+
   
   
-  &:focus {
-    background: #171924;
+
+  .searhIcon {
+    color: #ffffff5c;
+  }
+
+  .navbarSearch {
+    background: none;
+    outline: none;
+    border: none;
     color: rgba(255, 255, 255, 0.648);
-    box-shadow: none;
+    width: 100%;
+    transition: all ease 0.3s;
+    
+
+    &:focus {
+      background: #171924;
+      color: rgba(255, 255, 255, 0.648);
+      box-shadow: none;
+    }
+
+
+    @media screen and (min-width: 560px) {
+      width: 250px;
+      &:focus {
+        width: 300px;
+      }
+    }
+  }
+
+  .searchItemContainer {
+    position: absolute;
+    z-index: 101;
+    left: 0;
+    top: 35px;
+    width: inherit;
+    background: #171924;
+    color: #fff;
+    width: 100%;
+    border-radius: 0 0 inherit inherit;
+    padding: 25px 10px 15px;
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+
+    .trandigContainer {
+      display: flex;
+      align-items: center;
+
+      .fireIcon {
+        padding-bottom: 5px;
+        font-size: 1.4rem;
+        color: #ff775f;
+      }
+      h6 {
+        font-size: .8rem;
+      }
+    }
+
+    .item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 8px 0;
+
+      .titleCpntainer {
+        display: flex;
+        align-items: center;
+      }
+
+      .name {
+        padding: 0 5px;
+        font-weight: bold;
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .symbol {
+        color: #5e6172;
+        font-weight: bold;
+        display: inline-block;
+      }
+
+      .rank {
+        color: #5e6172;
+        font-weight: bold;
+      }
+
+      img {
+        width: 25px;
+        padding-bottom: 3px;
+      }
+    }
   }
 }
 
 .navbarHam:focus {
   box-shadow: none;
 }
+
