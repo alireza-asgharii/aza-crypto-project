@@ -619,7 +619,7 @@ const CoinDetails = () => {
                 )}
               </div>
             ) : null}
-            <ChartCoin range={range} />
+            <ChartCoin range={range} id={id} />
           </div>
         </div>
 

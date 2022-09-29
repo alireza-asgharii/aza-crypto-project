@@ -12,12 +12,12 @@ const fetchCoinError = (error) => {
   return { type: "FETCH_COIN_ERROR", payload: error };
 };
 
-const fetchCoin = (day, interval = '') => {
+const fetchCoin = (id, day, interval = '') => {
   return (dispatch) => {
     dispatch(fecthCoinRequest());
     axios
       .get(
-        `/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${day}&interval=${interval}`
+        `/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${day}&interval=${interval}`
       )
       .then((res) => dispatch(fetchCoinSuccess(res)))
       .catch((err) => dispatch(fetchCoinError(err)));

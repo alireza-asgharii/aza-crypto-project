@@ -62,7 +62,7 @@ const footer = (tooltipItems) => {
   return `Price: $${sum.toLocaleString()}`;
 };
 
-const ChartCoin = ({ range }) => {
+const ChartCoin = ({id,  range }) => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.coinChartState.coinChart);
   const isLoading = useSelector((state) => state.coinChartState.isLoading);
@@ -81,9 +81,9 @@ const ChartCoin = ({ range }) => {
   }
 
   useEffect(() => {
-    dispatch(fetchCoin(range));
+    dispatch(fetchCoin(id, range));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range]);
+  }, [range, id]);
 
   return (
     <>
