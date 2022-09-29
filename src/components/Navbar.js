@@ -47,7 +47,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
             <BsCoin className="me-2" />
@@ -79,43 +79,49 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <label className={styles.searchLabel}>
-              <FiSearch className={styles.searhIcon} />
-              <input
-                className={`form-control me-2 ${styles.navbarSearch}`}
-                type="text"
-                placeholder="Search"
-                onChange={changeHandler}
-                onFocus={() => setIsShow(true)}
-                onBlur={() => setTimeout(() => setIsShow(false), 200)}
-              />
+            <div className={styles.rightContainer}>
+              <div className={styles.loginButtonContainer}>
+                <button className={styles.login}>Login</button>
+                <button className={styles.signup}>Sign Up</button>
+              </div>
+              <label className={styles.searchLabel}>
+                <FiSearch className={styles.searhIcon} />
+                <input
+                  className={`form-control me-2 ${styles.navbarSearch}`}
+                  type="text"
+                  placeholder="Search"
+                  onChange={changeHandler}
+                  onFocus={() => setIsShow(true)}
+                  onBlur={() => setTimeout(() => setIsShow(false), 200)}
+                />
 
-              {inputValue === "" && isShow && !trandData.isLoadingTranding && (
-                <div className={styles.searchItemContainer}>
-                  <div className={styles.trandigContainer}>
-                    <h6>Tranding</h6>
-                    <MdLocalFireDepartment className={styles.fireIcon} />
-                  </div>
-                  {trandData.data.coins.map((coin) => (
-                    <SearchItem key={coin.item.id} data={coin.item} />
-                  ))}
-                </div>
-              )}
-
-              {searchState.data.length === 0
-                ? null
-                : isShow &&
-                  inputValue !== "" && (
-                    <div className={styles.searchItemContainer}>
-                      <div className={styles.trandigContainer}>
-                        <h6>Cryptoassets</h6>
-                      </div>
-                      {searchState.data.coins.map((item) => (
-                        <SearchItem key={item.id} data={item} />
-                      ))}
+                {inputValue === "" && isShow && !trandData.isLoadingTranding && (
+                  <div className={styles.searchItemContainer}>
+                    <div className={styles.trandigContainer}>
+                      <h6>Tranding</h6>
+                      <MdLocalFireDepartment className={styles.fireIcon} />
                     </div>
-                  )}
-            </label>
+                    {trandData.data.coins.map((coin) => (
+                      <SearchItem key={coin.item.id} data={coin.item} />
+                    ))}
+                  </div>
+                )}
+
+                {searchState.data.length === 0
+                  ? null
+                  : isShow &&
+                    inputValue !== "" && (
+                      <div className={styles.searchItemContainer}>
+                        <div className={styles.trandigContainer}>
+                          <h6>Cryptoassets</h6>
+                        </div>
+                        {searchState.data.coins.map((item) => (
+                          <SearchItem key={item.id} data={item} />
+                        ))}
+                      </div>
+                    )}
+              </label>
+            </div>
           </div>
         </div>
       </nav>

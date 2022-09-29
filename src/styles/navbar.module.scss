@@ -6,9 +6,6 @@
   padding: 0 10px;
   position: relative;
 
-  
-  
-
   .searhIcon {
     color: #ffffff5c;
   }
@@ -20,14 +17,12 @@
     color: rgba(255, 255, 255, 0.648);
     width: 100%;
     transition: all ease 0.3s;
-    
 
     &:focus {
       background: #171924;
       color: rgba(255, 255, 255, 0.648);
       box-shadow: none;
     }
-
 
     @media screen and (min-width: 560px) {
       width: 250px;
@@ -62,7 +57,7 @@
         color: #ff775f;
       }
       h6 {
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -108,3 +103,63 @@
   box-shadow: none;
 }
 
+.rightContainer {
+  display: flex;
+  align-items: center;
+
+  .loginButtonContainer {
+    button {
+      padding: 6px 18px;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .login {
+      margin-right: 10px;
+      border: 1px solid #3962f4;
+      background: none;
+      color: #3962f4;
+      border-radius: 7px;
+      transition: all ease 0.3s;
+
+      &:hover {
+        background: rgba(51, 51, 51, 0.153);
+      }
+    }
+
+    .signup {
+      margin-right: 10px;
+      border: none;
+      color: #fff;
+      background: #3962f4;
+      border-radius: 7px;
+      transition: all ease 0.3s;
+
+      &:hover {
+        background: #476dfb;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .navbarSearch {
+    padding: 10px 18px;
+  }
+
+  .rightContainer {
+    display: block;
+
+    .loginButtonContainer {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin-bottom: 10px;
+        padding: 10px 18px;
+        width: 100%;
+      }
+    }
+  }
+}
