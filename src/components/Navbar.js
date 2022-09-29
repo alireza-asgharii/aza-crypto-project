@@ -69,7 +69,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/cryptocurrencies">
+                <Link className="nav-link" to="/currencies">
                   Cryptocurrencies
                 </Link>
               </li>

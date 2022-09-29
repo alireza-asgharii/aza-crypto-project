@@ -5,6 +5,7 @@ import styled from "styled-components";
 //Components
 import Home from "./Home";
 import CoinDetails from "./shared/CoinDetails";
+import AboutUs from "./AboutUs";
 
 const Div = styled.div`
   color: #fff;
@@ -24,6 +25,7 @@ const Main = () => {
         <Route path="/" element={<Home />} />
         <Route path="/currencies" element={<Home />} />
         <Route path="/currencies/:id" element={<CoinDetails />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     </Div>
