@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import MarketCoinContextProvider from "./context/MarketCoinContextProvider";
 import MarkedContextProvider from "./context/MarkedContextProvider";
 import React, { useRef } from "react";
+import Footer from "./components/Footer";
 
 export const LoadingBarRef = React.createContext();
 
@@ -27,6 +28,7 @@ function App() {
             <MarkedContextProvider>
               <Navbar />
               <Main />
+              <Footer />
             </MarkedContextProvider>
           </Provider>
         </MarketCoinContextProvider>
