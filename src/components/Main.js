@@ -6,10 +6,12 @@ import styled from "styled-components";
 import Home from "./Home";
 import CoinDetails from "./shared/CoinDetails";
 import AboutUs from "./AboutUs";
+import Watchlist from "./Watchlist";
 
 const Div = styled.div`
   color: #fff;
   padding: 0 15px;
+  min-height: 100vh;
 
   @media screen and (min-width: 1700px) {
     max-width: 1700px;
@@ -26,6 +28,7 @@ const Main = () => {
         <Route path="/currencies" element={<Home />} />
         <Route path="/currencies/:id" element={<CoinDetails />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     </Div>
