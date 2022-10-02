@@ -12,7 +12,6 @@ import styles from "../../styles/CoinDetails.module.scss";
 import IconBreadcrumbs from "./IconBreadcrumbs";
 
 //Icons
-import { AiOutlineStar } from "react-icons/ai";
 import { BsQuestionCircle } from "react-icons/bs";
 import { MdMoreHoriz } from "react-icons/md";
 import { AiOutlineTwitter } from "react-icons/ai";
@@ -48,7 +47,6 @@ import ChartCoin from "./ChartCoin";
 import axios from "axios";
 
 //Context
-import { MarkedContext } from "../../context/MarkedContextProvider";
 import { LoadingBarRef } from "../../App";
 
 const CoinDetails = () => {
