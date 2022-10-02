@@ -27,7 +27,7 @@ const Navbar = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.coingecko.com/api/v3/search/trending")
+      .get("/api/v3/search/trending")
       .then((res) =>
         setTrandData({ ...trandData, data: res, isLoadingTranding: false })
       )
@@ -71,6 +71,11 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="/currencies">
                   Cryptocurrencies
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/watchlist">
+                  Watchlist
                 </Link>
               </li>
               <li className="nav-item">

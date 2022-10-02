@@ -5,15 +5,14 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-  console.log(state)
   switch (action.type) {
     case "ADD_TO_MARKEDS":
-      if (!state.markeds.find((item) => item === action.payload)) {
-        state.markeds.push(action.payload);
+      if (!state.markeds.find((item) => item.id === action.payload.id)) {
+        state.markeds.push({...action.payload});
       }
       return {markeds: state.markeds};
     case "DELETE_FROM_MARKEDS":
-      const filtered = state.markeds.filter((item) => item !== action.payload);
+      const filtered = state.markeds.filter((item) => item.id !== action.payload.id);
       return { markeds: filtered };
     default:
       return state;

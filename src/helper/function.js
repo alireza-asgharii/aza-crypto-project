@@ -103,7 +103,7 @@ const checkEmpty = (value) => {
 };
 
 const checkStar = (arr, id) => {
-  const find = arr.find((item) => item === id);
+  const find = arr.find((item) => item.id === id);
   return find;
 };
 
