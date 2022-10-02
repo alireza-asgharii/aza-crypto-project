@@ -30,7 +30,7 @@ const CoinTr = ({ coin }) => {
             onClick={() => {
               dispatch({
                 type: "DELETE_FROM_MARKEDS",
-                payload: coin.id,
+                payload: coin,
               });
             }}
           />
@@ -40,7 +40,7 @@ const CoinTr = ({ coin }) => {
             onClick={() =>
               dispatch({
                 type: "ADD_TO_MARKEDS",
-                payload: coin.id,
+                payload: coin,
               })
             }
           />

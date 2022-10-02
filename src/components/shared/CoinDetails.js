@@ -25,12 +25,10 @@ import { MdContentCopy } from "react-icons/md";
 import { MdOutlineDone } from "react-icons/md";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { RiArrowUpSFill } from "react-icons/ri";
-import { AiFillStar } from "react-icons/ai";
 
 //Function
 import {
   changePercentage,
-  checkStar,
   findAllMinMax,
   findMinMax,
   getTime,
@@ -54,7 +52,6 @@ import { MarkedContext } from "../../context/MarkedContextProvider";
 import { LoadingBarRef } from "../../App";
 
 const CoinDetails = () => {
-  const { state, dispatch } = useContext(MarkedContext);
   const ref = useContext(LoadingBarRef)
 
   const [isOpenExplor, setExplor] = useState(false);
@@ -179,31 +176,6 @@ const CoinDetails = () => {
                 </span>
               </span>
             </div>
-            {checkStar(state.markeds, coinData.id) ? (
-              <span
-                className={styles.addStar}
-                onClick={() => {
-                  dispatch({
-                    type: "DELETE_FROM_MARKEDS",
-                    payload: coinData.id,
-                  });
-                }}
-              >
-                <AiFillStar className={styles.starYellow} />
-              </span>
-            ) : (
-              <span
-                className={styles.addStar}
-                onClick={() =>
-                  dispatch({
-                    type: "ADD_TO_MARKEDS",
-                    payload: coinData.id,
-                  })
-                }
-              >
-                <AiOutlineStar className={styles.star} />
-              </span>
-            )}
             <div className={styles.morePrice}>
               <div className={styles.priceItem}>
                 <p>
