@@ -21,6 +21,9 @@ const Footer = () => {
               <Link to="/currencies">currencies</Link>
             </li>
             <li>
+              <Link to="/watchlist">Watchlist</Link>
+            </li>
+            <li>
               <Link to="/aboutus">About Us</Link>
             </li>
           </ul>
