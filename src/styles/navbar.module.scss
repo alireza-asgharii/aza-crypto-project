@@ -163,3 +163,35 @@
     }
   }
 }
+
+//global Section
+
+.topDataResponse {
+  overflow: auto;
+  background: #212529;
+  border-top: 1px solid #655c5c37;
+
+  @media screen and (min-width: 1199px) {
+    border-bottom: 1px solid #655c5c37;
+    border-top: none;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.topData {
+  display: flex;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+@media screen and (min-width: 1199px) {
+  .topDataResponse {
+    border-bottom: 1px solid #655c5c37;
+    border-top: none;
+  }
+  .topData {
+    padding: 16px 10px;
+  }
+}

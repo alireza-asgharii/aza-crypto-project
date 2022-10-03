@@ -1,0 +1,54 @@
+.item {
+  margin: 0 6px;
+  font-size: 0.7rem;
+  min-width: max-content;
+  display: flex;
+  align-items: center;
+
+  .name {
+    color: #a1a7bb;
+    margin-right: 5px;
+    font-weight: 600;
+  }
+  .value {
+    color: #5578f5e5;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+
+    .priceChange {
+      margin-left: 4px;
+      font-size: 0.6rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .redChange {
+      color: #ca343f;
+    }
+
+    .greenChange {
+      color: #16bf80;
+    }
+
+    .upDownIcons {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) {
+  .item {
+    font-size: 0.82rem;
+    margin: 0 8px;
+
+    .value {
+      .priceChange {
+        font-size: 0.74rem;
+      }
+      .upDownIcons {
+        font-size: 0.96rem;
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ import { BsCoin } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import SearchItem from "./shared/SearchItem";
 import { MdLocalFireDepartment } from "react-icons/md";
+import GlobalData from "./GlobalData";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -46,8 +47,13 @@ const Navbar = () => {
     setInputValue(e.target.value);
   };
   return (
-    <>
-      <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
+    <div className={`d-flex flex-xl-column flex-column-reverse ${styles.container}`}>
+      <div className={styles.topDataResponse}>
+        <div className={styles.topData} style={{ color: "#fff" }}>
+          <GlobalData />
+        </div>
+      </div>
+      <nav className="navbar navbar-expand-xl navbar-dark bg-dark py-xl-3">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
             <BsCoin className="me-2" />
@@ -100,17 +106,20 @@ const Navbar = () => {
                   onBlur={() => setTimeout(() => setIsShow(false), 200)}
                 />
 
-                {inputValue === "" && isShow && !trandData.isLoadingTranding && trandData.data.coins.length !== 0 && (
-                  <div className={styles.searchItemContainer}>
-                    <div className={styles.trandigContainer}>
-                      <h6>Tranding</h6>
-                      <MdLocalFireDepartment className={styles.fireIcon} />
+                {inputValue === "" &&
+                  isShow &&
+                  !trandData.isLoadingTranding &&
+                  trandData.data.coins.length !== 0 && (
+                    <div className={styles.searchItemContainer}>
+                      <div className={styles.trandigContainer}>
+                        <h6>Tranding</h6>
+                        <MdLocalFireDepartment className={styles.fireIcon} />
+                      </div>
+                      {trandData.data.coins.map((coin) => (
+                        <SearchItem key={coin.item.id} data={coin.item} />
+                      ))}
                     </div>
-                    {trandData.data.coins.map((coin) => (
-                      <SearchItem key={coin.item.id} data={coin.item} />
-                    ))}
-                  </div>
-                )}
+                  )}
 
                 {searchState.data.length === 0
                   ? null
@@ -130,7 +139,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 
