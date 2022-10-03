@@ -100,7 +100,7 @@ const Navbar = () => {
                   onBlur={() => setTimeout(() => setIsShow(false), 200)}
                 />
 
-                {inputValue === "" && isShow && !trandData.isLoadingTranding && (
+                {inputValue === "" && isShow && !trandData.isLoadingTranding && trandData.data.coins.length !== 0 && (
                   <div className={styles.searchItemContainer}>
                     <div className={styles.trandigContainer}>
                       <h6>Tranding</h6>
