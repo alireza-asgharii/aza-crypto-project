@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import TableSkeleton from "../loading/TableSkeleton";
@@ -10,6 +10,9 @@ import { MarkedContext } from "../context/MarkedContextProvider";
 //Styles
 import styles from "../styles/home.module.scss";
 
+//Context
+import { LoadingBarRef } from "../App";
+
 const Tbody = styled.tbody`
   filter: ${(props) => (props.isEmpty ? "blur(10px)" : "")};
 `;
@@ -17,6 +20,12 @@ const Tbody = styled.tbody`
 
 const Watchlist = () => {
   const { state } = useContext(MarkedContext);
+  const ref = useContext(LoadingBarRef)
+
+  useEffect(() => {
+    ref.current.complete()
+  }, [ref])
+  
 
   return (
     <div>
