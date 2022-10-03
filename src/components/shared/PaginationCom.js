@@ -16,7 +16,7 @@ const PaginationCom = ({ page }) => {
   
   useEffect(() => {
     setNPage(+query.page)
-    document.documentElement.scrollTop = 1;
+    document.documentElement.scrollTop = 0;
   }, [query.page])
 
 
