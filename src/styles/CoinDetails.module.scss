@@ -474,10 +474,11 @@
 
 .descriptionContainer {
   margin-top: 50px;
+  padding-bottom: 70px;
 
   .text {
     color: #99a8bd;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 
     @media screen and (min-width: 560px) {
       font-size: 1.1rem;
@@ -493,7 +494,7 @@
 
   .item {
     .title {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: #bbbec9;
       padding-bottom: 4px;
 
