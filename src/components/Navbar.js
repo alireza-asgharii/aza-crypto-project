@@ -46,8 +46,12 @@ const Navbar = () => {
     dispatch(searchCoin(e.target.value));
     setInputValue(e.target.value);
   };
+
+  console.log(typeof trandData.data)
   return (
-    <div className={`d-flex flex-xl-column flex-column-reverse ${styles.container}`}>
+    <div
+      className={`d-flex flex-xl-column flex-column-reverse ${styles.container}`}
+    >
       <div className={styles.topDataResponse}>
         <div className={styles.topData} style={{ color: "#fff" }}>
           <GlobalData />
@@ -109,7 +113,8 @@ const Navbar = () => {
                 {inputValue === "" &&
                   isShow &&
                   !trandData.isLoadingTranding &&
-                  trandData.data.coins.length !== 0 && (
+                  trandData.data.length !== 0 &&
+                  typeof trandData.data === 'object' && (
                     <div className={styles.searchItemContainer}>
                       <div className={styles.trandigContainer}>
                         <h6>Tranding</h6>
