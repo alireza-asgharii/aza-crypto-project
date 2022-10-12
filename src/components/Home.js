@@ -47,7 +47,7 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {data.length === 0 ? (
+              {data.length === 0 || !Array.isArray(data) ? (
                 <TableSkeleton length={10} />
               ) : (
                 data.map((item) => (
