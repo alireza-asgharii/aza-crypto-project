@@ -38,7 +38,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Cryptos:</span>
         <span className={styles.value}>
-          {globalData.isLoading || globalData.data.length === 0 ? (
+          {globalData.isLoading || !globalData.data ? (
             <Skeleton
               variant="rounded"
               width={38}
@@ -53,7 +53,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Exchanges:</span>
         <span className={styles.value}>
-          {globalData.isLoading || globalData.data.length === 0 ? (
+          {globalData.isLoading || !globalData.data ? (
             <Skeleton
               variant="rounded"
               width={38}
@@ -68,7 +68,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Market Cap:</span>
         <span className={styles.value}>
-          {globalData.isLoading || globalData.data.length === 0 ? (
+          {globalData.isLoading || !globalData.data ? (
             <Skeleton
               variant="rounded"
               width={170}
@@ -104,7 +104,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>24h Vol:</span>
         <span className={styles.value}>
-          {globalData.isLoading || globalData.data.length === 0 ? (
+          {globalData.isLoading || !globalData.data ? (
             <Skeleton
               variant="rounded"
               width={120}
@@ -119,7 +119,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Dominance:</span>
         <span className={styles.value}>
-        {globalData.isLoading || globalData.data.length === 0 ? (
+        {globalData.isLoading || !globalData.data ? (
             <Skeleton
               variant="rounded"
               width={38}
