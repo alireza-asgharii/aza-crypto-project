@@ -44,7 +44,7 @@ const splitForLink = (name) => {
 
 const toLocaleS = (value) => {
   if (value) {
-    return value.toLocaleString();
+    return new Intl.NumberFormat('en-US').format(value);
   } else {
     return "-";
   }

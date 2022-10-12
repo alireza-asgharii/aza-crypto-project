@@ -8,7 +8,7 @@ import { AiFillStar } from "react-icons/ai";
 import { RiArrowUpSFill, RiArrowDownSFill } from "react-icons/ri";
 
 //Helper
-import { checkStar, splitName, toFixed, upDown } from "../../helper/function";
+import { checkStar, splitName, toFixed, toLocaleS, upDown } from "../../helper/function";
 
 // Chartjs
 import Chart7d from ".//Chart7d";
@@ -59,7 +59,7 @@ const CoinTr = ({ coin }) => {
           </span>
         </Link>
       </td>
-      <td>${coin.current_price.toLocaleString()}</td>
+      <td>${toLocaleS(coin.current_price)}</td>
       <td
         className={
           upDown(coin.price_change_percentage_1h_in_currency)
@@ -102,9 +102,9 @@ const CoinTr = ({ coin }) => {
         )}
         {toFixed(coin.price_change_percentage_7d_in_currency, 2)}%
       </td>
-      <td>${coin.total_volume.toLocaleString()}</td>
-      <td>${coin.market_cap.toLocaleString()}</td>
-      <td>{`${coin.circulating_supply.toLocaleString()} ${coin.symbol.toUpperCase()}`}</td>
+      <td>${toLocaleS(coin.total_volume)}</td>
+      <td>${toLocaleS(coin.market_cap)}</td>
+      <td>{`${toLocaleS(coin.circulating_supply)} ${coin.symbol.toUpperCase()}`}</td>
       <td>
         <Chart7d
           data={coin}

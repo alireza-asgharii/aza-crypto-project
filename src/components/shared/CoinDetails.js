@@ -200,7 +200,7 @@ const CoinDetails = () => {
                   </span>
                 </p>
                 <span className={styles.priceSpan}>
-                  ${coinData.market_data.market_cap.usd.toLocaleString()}
+                  ${toLocaleS(coinData.market_data.market_cap.usd)}
                 </span>
               </div>
               <div className={styles.priceItem}>
@@ -225,7 +225,7 @@ const CoinDetails = () => {
                   </span>
                 </p>
                 <span className={styles.priceSpan}>
-                  ${coinData.market_data.total_volume.usd.toLocaleString()}
+                  ${toLocaleS(coinData.market_data.total_volume.usd)}
                 </span>
               </div>
               <div className={styles.priceItem}>

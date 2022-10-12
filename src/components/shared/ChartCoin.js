@@ -9,6 +9,9 @@ import { Line } from "react-chartjs-2";
 //styls
 import styles from "../../styles/chartCoin.module.scss";
 
+//helper
+import { toLocaleS } from "../../helper/function";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -59,10 +62,10 @@ const footer = (tooltipItems) => {
   tooltipItems.forEach(function (tooltipItem) {
     sum += tooltipItem.parsed.y;
   });
-  return `Price: $${sum.toLocaleString()}`;
+  return `Price: $${toLocaleS(sum)}`;
 };
 
-const ChartCoin = ({id,  range }) => {
+const ChartCoin = ({ id, range }) => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.coinChartState.coinChart);
   const isLoading = useSelector((state) => state.coinChartState.isLoading);
@@ -190,10 +193,10 @@ const ChartCoin = ({id,  range }) => {
               yAxes: {
                 display: true,
                 ticks: {
-                  min: Math.min.apply(null, y).toFixed(2).toLocaleString(),
-                  max: Math.max.apply(null, y).toFixed(2).toLocaleString(),
+                  min: toLocaleS(Math.min.apply(null, y).toFixed(2)),
+                  max: toLocaleS(Math.max.apply(null, y).toFixed(2)),
                   callback: (val, index) => {
-                    return `$${val.toLocaleString()}`;
+                    return `$${toLocaleS(val)}`;
                   },
                 },
                 grid: {
