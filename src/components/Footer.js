@@ -57,7 +57,7 @@ const Footer = () => {
           <ul>
             <h6 className={styles.title}>Developer links</h6>
             <li>
-              <a href="https://www.github.com/alirezwa03">Github</a>
+              <a href="https://www.github.com/alireza-asgharii">Github</a>
             </li>
             <li>
               <a href="https://t.me/Alirezwa03/">Telegram</a>
