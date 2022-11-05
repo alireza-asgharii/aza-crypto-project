@@ -73,8 +73,6 @@
   }
 }
 
-
-
 .addStar {
   border: 1px solid #404040;
   border-radius: 6px;
@@ -332,6 +330,8 @@
 
   .chart {
     position: relative;
+    margin-bottom: 60px;
+
     .loaderContainer {
       position: absolute;
       width: 100%;
@@ -473,8 +473,12 @@
 }
 
 .descriptionContainer {
-  margin-top: 50px;
-  padding-bottom: 70px;
+  margin-top: 40px;
+  padding-bottom: 40px;
+
+  @media screen and (min-width: 990px) {
+    margin-top: 10px;
+  }
 
   .text {
     color: #99a8bd;
