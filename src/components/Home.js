@@ -65,7 +65,7 @@ const Home = () => {
             </thead>
             <tbody>
               {data.length === 0 || !Array.isArray(data) || isLoading || error.isErr ? (
-                <TableSkeleton length={10} />
+                <TableSkeleton length={20} />
               ) : (
                 data.map((item) => <CoinTr coin={item} key={item.id} />)
               )}
