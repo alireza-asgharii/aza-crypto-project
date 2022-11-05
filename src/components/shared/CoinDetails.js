@@ -93,7 +93,7 @@ const CoinDetails = () => {
     document.documentElement.scrollTop = 0;
     axios
       .get(
-        `/api/v3/coisns/${id}/market_chart?vs_currency=usd&days=max&interval=''`
+        `/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max&interval=''`
       )
       .then((res) => {
         setDataMaxMin(res.prices);
