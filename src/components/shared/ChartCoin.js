@@ -69,7 +69,7 @@ const ChartCoin = ({ id, range }) => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.coinChartState.coinChart);
   const isLoading = useSelector((state) => state.coinChartState.isLoading);
-  const isError = useSelector((state) => state.coinChartState.error);
+  const isError = useSelector((state) => state.coinChartState.error.isErr);
 
   let x = [];
   let y = [];

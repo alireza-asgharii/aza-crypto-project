@@ -1,7 +1,7 @@
 const initialState = {
   isLoading: false,
   coinChart: [],
-  error: "",
+  error: { isErr: false, payload: {} }
 };
 
 const coinChartReducer = (state = initialState, action) => {
@@ -9,9 +9,9 @@ const coinChartReducer = (state = initialState, action) => {
     case "FETCH_COIN_REQUEST":
       return { ...state, isLoading: true, error: '' };
     case "FETCH_COIN_SUCCESS":
-      return { error: '', isLoading: false, coinChart: action.payload };
+      return { error: { isErr: false, payload: action.payload }, isLoading: false, coinChart: action.payload };
     case "FETCH_COIN_ERROR":
-      return { ...state, isLoading: false, error: action.payload };
+      return { ...state, isLoading: false, error: { isErr: true, payload: action.payload } };
     default:
       return state;
   }
