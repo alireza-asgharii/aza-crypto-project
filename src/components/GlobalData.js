@@ -22,12 +22,12 @@ const GlobalData = () => {
     axios
       .get("/api/v3/global")
       .then((res) =>
-        setGlobalData({ err: "", data: res.data, isLoading: false })
+        setGlobalData({ err: false, data: res.data, isLoading: false })
       )
       .catch((err) =>
         setGlobalData((prevState) => ({
           ...prevState,
-          err: err,
+          err: true,
           isLoading: false,
         }))
       );
@@ -38,7 +38,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Cryptos:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data ? (
+          {globalData.isLoading || !globalData.data || globalData.err ? (
             <Skeleton
               variant="rounded"
               width={38}
@@ -53,7 +53,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Exchanges:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data ? (
+          {globalData.isLoading || !globalData.data || globalData.err ? (
             <Skeleton
               variant="rounded"
               width={38}
@@ -68,7 +68,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Market Cap:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data ? (
+          {globalData.isLoading || !globalData.data || globalData.err ? (
             <Skeleton
               variant="rounded"
               width={170}
@@ -104,7 +104,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>24h Vol:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data ? (
+          {globalData.isLoading || !globalData.data || globalData.err ? (
             <Skeleton
               variant="rounded"
               width={120}
@@ -119,7 +119,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>Dominance:</span>
         <span className={styles.value}>
-        {globalData.isLoading || !globalData.data ? (
+        {globalData.isLoading || !globalData.data || globalData.err ? (
             <Skeleton
               variant="rounded"
               width={38}
