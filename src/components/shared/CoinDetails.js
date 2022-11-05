@@ -77,6 +77,7 @@ const CoinDetails = () => {
   //for MaxMin
   const [dataMaxMin, setDataMaxMin] = useState([]);
   const [minMaxLaoding, seMaxMinLoading] = useState(true);
+  const [minMaxError, seMaxMinError] = useState(false);
 
   const { id } = useParams();
   const path = useLocation();
@@ -87,14 +88,20 @@ const CoinDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  //fetch for minmax
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     axios
       .get(
-        `/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max&interval=''`
+        `/api/v3/coisns/${id}/market_chart?vs_currency=usd&days=max&interval=''`
       )
       .then((res) => {
         setDataMaxMin(res.prices);
+        seMaxMinLoading(false);
+        seMaxMinError(false);
+      })
+      .catch((err) => {
+        seMaxMinError(true);
         seMaxMinLoading(false);
       });
   }, [id]);
@@ -135,10 +142,7 @@ const CoinDetails = () => {
   return (
     <div>
       <div className={styles.breadcrumbsContainer}>
-        <IconBreadcrumbs
-          path={path}
-          name={coinData?.name}
-        />
+        <IconBreadcrumbs path={path} name={coinData?.name} />
       </div>
       {coinData.length === 0 || isLoadingCoinData || coinDataError ? (
         <CoinDetailsSkeleton />
@@ -504,7 +508,7 @@ const CoinDetails = () => {
       <section className={styles.bottomContainer}>
         <div className={styles.chartContainer}>
           <h6 className={styles.titleChart}>{coinData?.name} to USD Chart</h6>
-          { isError ? (
+          {isError ? (
             <Skeleton
               variant="rounded"
               width={300}
@@ -787,7 +791,10 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
+                {minMaxLaoding ||
+                isLoadingCoinData ||
+                coinDataError ||
+                minMaxError ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -799,7 +806,10 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
+                {minMaxLaoding ||
+                isLoadingCoinData ||
+                coinDataError ||
+                minMaxError ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -838,7 +848,10 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
+                {minMaxLaoding ||
+                isLoadingCoinData ||
+                coinDataError ||
+                minMaxError ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -850,7 +863,10 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
+                {minMaxLaoding ||
+                isLoadingCoinData ||
+                coinDataError ||
+                minMaxError ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -890,7 +906,7 @@ const CoinDetails = () => {
           </div>
         </div>
       </section>
-      {isLoadingCoinData || minMaxLaoding || coinDataError ? null : (
+      {isLoadingCoinData || minMaxLaoding || coinDataError || minMaxError ? null : (
         <section className={styles.descriptionContainer}>
           <h6 className={styles.title}>
             {coinData.symbol.toUpperCase()} Price Today
