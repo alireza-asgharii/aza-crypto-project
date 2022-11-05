@@ -1,10 +1,15 @@
 import React, { useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import queryString from 'query-string'
+
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { coinMarket } from "../redux/coinsMarket/coinMarketAction";
 
 //styles
 import styles from "../styles/home.module.scss";
 
 //Context
-import { MarketCoinContext } from "../context/MarketCoinContextProvider";
 import { LoadingBarRef } from "../App";
 
 //Components
@@ -14,14 +19,26 @@ import PaginationCom from "./shared/PaginationCom";
 import TableSkeleton from "../loading/TableSkeleton";
 import CoinTr from "./shared/CoinTr";
 
+
 const Home = () => {
-  const { data } = useContext(MarketCoinContext);
-  const ref = useContext(LoadingBarRef)
+  const location = useLocation();
+  const query = queryString.parse(location.search)
+  const ref = useContext(LoadingBarRef);
+
+  const {isLoading, data, error} = useSelector((state) => state.coinMarketState);
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(coinMarket(query.page));
     ref.current.complete()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.page]);
+
+  useEffect(() => {
+    ref.current.complete();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <div className={styles.container}>
@@ -47,12 +64,10 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {data.length === 0 || !Array.isArray(data) ? (
+              {data.length === 0 || !Array.isArray(data) || isLoading || error.isErr ? (
                 <TableSkeleton length={10} />
               ) : (
-                data.map((item) => (
-                 <CoinTr coin={item} key={item.id} />
-                ))
+                data.map((item) => <CoinTr coin={item} key={item.id} />)
               )}
             </tbody>
           </table>

@@ -9,7 +9,6 @@ import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 
 //ContextProvider
-import MarketCoinContextProvider from "./context/MarketCoinContextProvider";
 import MarkedContextProvider from "./context/MarkedContextProvider";
 import React, { useEffect, useRef } from "react";
 import Footer from "./components/Footer";
@@ -27,7 +26,6 @@ function App() {
     <div>
       <LoadingBarRef.Provider value={ref}>
         <LoadingBar color="#2998ff" ref={ref} />
-        <MarketCoinContextProvider>
           <Provider store={store}>
             <MarkedContextProvider>
               <Navbar />
@@ -35,7 +33,6 @@ function App() {
               <Footer />
             </MarkedContextProvider>
           </Provider>
-        </MarketCoinContextProvider>
       </LoadingBarRef.Provider>
     </div>
   );
