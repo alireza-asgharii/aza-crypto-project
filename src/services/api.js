@@ -7,13 +7,7 @@ const fetchData = async (page) => {
   return request;
 };
 
-const fetchCoinData = async (id) => {
-  const request = await axios.get(
-    `/api/v3/coins/${id}?localization=true&sparkline=true`
-  );
-  return request;
-};
 
 
 
-export { fetchData, fetchCoinData };
+export { fetchData };

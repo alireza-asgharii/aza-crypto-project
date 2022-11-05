@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-//api
-import { fetchCoinData } from "../../services/api";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDetails } from "../../redux/coinDetails/detailsAction";
 
 //Styles
 import styles from "../../styles/CoinDetails.module.scss";
@@ -50,14 +48,16 @@ import axios from "axios";
 import { LoadingBarRef } from "../../App";
 
 const CoinDetails = () => {
-  const ref = useContext(LoadingBarRef)
+  const ref = useContext(LoadingBarRef);
 
   const [isOpenExplor, setExplor] = useState(false);
+
+  //chartjs
   const [isCopy, setCopy] = useState(false);
   const [range, setRange] = useState(1);
   const isLoading = useSelector((state) => state.coinChartState.isLoading);
-  const isError = useSelector((state) => state.coinChartState.error);
-  const [isLoadingCoinData, setCoinLoading] = useState(true);
+  const isError = useSelector((state) => state.coinChartState.error.isErr);
+
   const [Tooltips, setTooltips] = useState({
     marketCap: false,
     Trabding24: false,
@@ -67,8 +67,12 @@ const CoinDetails = () => {
     maxSupply: false,
   });
 
-  //newData
-  const [coinData, setCoinData] = useState([]);
+  //coinData
+  const dispatch = useDispatch();
+  const coinDetailsState = useSelector((state) => state.coinDetailsState);
+  const coinData = coinDetailsState.coinData;
+  const isLoadingCoinData = coinDetailsState.isLoading;
+  const coinDataError = coinDetailsState.error.isErr;
 
   //for MaxMin
   const [dataMaxMin, setDataMaxMin] = useState([]);
@@ -78,14 +82,9 @@ const CoinDetails = () => {
   const path = useLocation();
 
   useEffect(() => {
-    setCoinLoading(true);
-    const get = async () => {
-      setCoinData(await fetchCoinData(id));
-      setCoinLoading(false);
-      ref.current.complete()
-    };
-    get();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(fetchDetails(id));
+    ref.current.complete();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
@@ -136,9 +135,12 @@ const CoinDetails = () => {
   return (
     <div>
       <div className={styles.breadcrumbsContainer}>
-        <IconBreadcrumbs path={path} name={coinData.name} />
+        <IconBreadcrumbs
+          path={path}
+          name={coinData?.name}
+        />
       </div>
-      {coinData.id === undefined ? (
+      {coinData.length === 0 || isLoadingCoinData || coinDataError ? (
         <CoinDetailsSkeleton />
       ) : (
         <section className={styles.topSection}>
@@ -501,8 +503,8 @@ const CoinDetails = () => {
       )}
       <section className={styles.bottomContainer}>
         <div className={styles.chartContainer}>
-          <h6 className={styles.titleChart}>{coinData.name} to USD Chart</h6>
-          {coinData.id === undefined ? (
+          <h6 className={styles.titleChart}>{coinData?.name} to USD Chart</h6>
+          { isError ? (
             <Skeleton
               variant="rounded"
               width={300}
@@ -595,7 +597,7 @@ const CoinDetails = () => {
 
         <div className={styles.coinPrice}>
           <h6 className={styles.title}>
-            {isLoadingCoinData ? (
+            {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
               <Skeleton
                 variant="rounded"
                 sx={{ bgcolor: "grey.810" }}
@@ -607,7 +609,7 @@ const CoinDetails = () => {
             )}
           </h6>
           <span className={styles.name}>
-            {isLoadingCoinData ? (
+            {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
               <Skeleton
                 variant="rounded"
                 sx={{ bgcolor: "grey.810" }}
@@ -621,7 +623,7 @@ const CoinDetails = () => {
           <div className={styles.listContainer}>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -633,7 +635,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -647,7 +649,7 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -659,7 +661,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -675,7 +677,7 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -687,7 +689,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -707,7 +709,7 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -719,7 +721,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -733,7 +735,7 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -745,7 +747,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -759,7 +761,7 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -771,7 +773,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {isLoadingCoinData ? (
+                {isLoadingCoinData || coinDataError || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -785,7 +787,7 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {minMaxLaoding || isLoadingCoinData ? (
+                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -797,7 +799,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {minMaxLaoding || isLoadingCoinData ? (
+                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -836,7 +838,7 @@ const CoinDetails = () => {
             </div>
             <div className={styles.item}>
               <span className={styles.nameItem}>
-                {minMaxLaoding || isLoadingCoinData ? (
+                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -848,7 +850,7 @@ const CoinDetails = () => {
                 )}
               </span>
               <span className={styles.priceitem}>
-                {minMaxLaoding || isLoadingCoinData ? (
+                {minMaxLaoding || isLoadingCoinData || coinData.length === 0 ? (
                   <Skeleton
                     variant="rounded"
                     sx={{ bgcolor: "grey.810" }}
@@ -888,7 +890,7 @@ const CoinDetails = () => {
           </div>
         </div>
       </section>
-      {!isLoadingCoinData && !minMaxLaoding && (
+      {isLoadingCoinData || minMaxLaoding || coinDataError ? null : (
         <section className={styles.descriptionContainer}>
           <h6 className={styles.title}>
             {coinData.symbol.toUpperCase()} Price Today

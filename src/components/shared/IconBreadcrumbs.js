@@ -55,7 +55,7 @@ export default function IconBreadcrumbs({ path, name }) {
         </CustomizedLink>
         <Typography sx={{ display: "flex", alignItems: "center" }}>
           <MonetizationOnOutlinedIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-          {name ? (
+          {name !== undefined ? (
             name
           ) : (
             <Skeleton
