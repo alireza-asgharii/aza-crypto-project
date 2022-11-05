@@ -30,12 +30,12 @@ const Navbar = () => {
     axios
       .get("/api/v3/search/trending")
       .then((res) =>
-        setTrandData({ ...trandData, data: res, isLoadingTranding: false })
+        setTrandData({ err: false, data: res, isLoadingTranding: false })
       )
       .catch((err) =>
         setTrandData({
           data: [],
-          err: err,
+          err: true,
           isLoadingTranding: false,
         })
       );
@@ -47,7 +47,6 @@ const Navbar = () => {
     setInputValue(e.target.value);
   };
 
-  console.log(typeof trandData.data)
   return (
     <div
       className={`d-flex flex-xl-column flex-column-reverse ${styles.container}`}
@@ -114,7 +113,8 @@ const Navbar = () => {
                   isShow &&
                   !trandData.isLoadingTranding &&
                   trandData.data.length !== 0 &&
-                  typeof trandData.data === 'object' && (
+                  typeof trandData.data === "object" &&
+                  !trandData.err && (
                     <div className={styles.searchItemContainer}>
                       <div className={styles.trandigContainer}>
                         <h6>Tranding</h6>
@@ -126,7 +126,7 @@ const Navbar = () => {
                     </div>
                   )}
 
-                {searchState.data.length === 0
+                {searchState.isLoading || searchState.error
                   ? null
                   : isShow &&
                     inputValue !== "" && (

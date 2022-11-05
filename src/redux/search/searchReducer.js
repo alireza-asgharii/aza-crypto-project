@@ -1,7 +1,7 @@
 const initialState = {
   isLoading: false,
   data: [],
-  error: "",
+  error: false,
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -9,9 +9,9 @@ const searchReducer = (state = initialState, action) => {
     case "FETCH_SEARCH_REQUEST":
       return { ...state, isLoading: true };
     case "FETCH_SEARCH_SUCCESS":
-      return { error: "", isLoading: false, data: action.payload };
+      return { error: false, isLoading: false, data: action.payload };
     case "FETCH_SEARCH_ERROR":
-      return { ...state, isLoading: false, error: action.payload };
+      return { ...state, isLoading: false, error: true };
     default:
       return state;
   }
