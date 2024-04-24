@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import queryString from 'query-string'
+import queryString from "query-string";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -18,61 +18,64 @@ import PaginationCom from "../components/modules/PaginationCom";
 //Skeleton Lading
 import TableSkeleton from "../loading/TableSkeleton";
 import CoinTr from "../components/modules/CoinTr";
-
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { fetchCoinsMarket } from "../services/queries";
+import TheadTr from "../components/modules/TheadTr";
+import Error from "../components/templates/Error";
+import { useGetCoinsMarket } from "../hooks/useQueries";
 
 const Home = () => {
   const location = useLocation();
-  const query = queryString.parse(location.search)
+  const query = queryString.parse(location.search);
   const ref = useContext(LoadingBarRef);
 
-  const {isLoading, data, error} = useSelector((state) => state.coinMarketState);
-  const dispatch = useDispatch();
+  //react query
+  const { isPending, isFetching, isLoading, data, error, isPlaceholderData } =
+    useGetCoinsMarket(query.page);
 
-  useEffect(() => {
-    dispatch(coinMarket(query.page));
-    ref.current.complete()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.page]);
+  console.log({
+    isLoading,
+    isPending,
+    isFetching,
+    data,
+    isPlaceholderData,
+    error,
+  });
 
   useEffect(() => {
     ref.current.complete();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query.page]);
 
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.homeTitle}>
-          Today's Cryptocurrency Prices by Market Cap
-        </h1>
+        {!error && (
+          <h1 className={styles.homeTitle}>
+            Today's Cryptocurrency Prices by Market Cap
+          </h1>
+        )}
+
         <div className={styles.coinsContainer}>
-          <table className={styles.coinTable}>
-            <thead>
-              <tr>
-                <th className={styles.sticky}> </th>
-                <th className={`${styles.sticky} ${styles.rankNumber}`}>#</th>
-                <th className={styles.sticky}>Name</th>
-                <th>Price</th>
-                <th>1h %</th>
-                <th>24h %</th>
-                <th>7d %</th>
-                <th>Volume(24h)</th>
-                <th>Market Cap</th>
-                <th>Circulating Supply</th>
-                <th>Last 7 Days</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.length === 0 || !Array.isArray(data) || isLoading || error.isErr ? (
-                <TableSkeleton length={10} />
-              ) : (
-                data.map((item) => <CoinTr coin={item} key={item.id} />)
-              )}
-            </tbody>
-          </table>
+          {error && <Error />}
+          {!error && (
+            <table className={styles.coinTable}>
+              <thead>
+                <TheadTr />
+              </thead>
+              <tbody>
+                {isPending ? (
+                  <TableSkeleton length={10} />
+                ) : (
+                  data &&
+                  !error &&
+                  data.map((item) => <CoinTr coin={item} key={item.id} />)
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
-        <PaginationCom page={120} />
+        {!error && <PaginationCom page={120} />}
       </div>
     </>
   );
