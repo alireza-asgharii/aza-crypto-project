@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { searchCoin } from "../redux/search/searchAction";
+import { searchCoin } from "../../redux/search/searchAction";
 
 // styles
-import styles from "../styles/navbar.module.scss";
+import styles from "../../styles/navbar.module.scss";
 
 //icons
 import { BsCoin } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
-import SearchItem from "./shared/SearchItem";
+import SearchItem from "../modules/SearchItem";
 import { MdLocalFireDepartment } from "react-icons/md";
 import GlobalData from "./GlobalData";
 

@@ -6,10 +6,10 @@ import { Skeleton } from "@mui/material";
 import { RiArrowUpSFill, RiArrowDownSFill } from "react-icons/ri";
 
 //Helper
-import { toLocaleS, upDown } from "../helper/function";
+import { toLocaleS, upDown } from "../../helper/function";
 
 //Styles
-import styles from "../styles/globalData.module.scss";
+import styles from "../../styles/globalData.module.scss";
 
 const GlobalData = () => {
   const [globalData, setGlobalData] = useState({

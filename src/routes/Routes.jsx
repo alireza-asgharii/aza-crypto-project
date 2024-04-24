@@ -3,10 +3,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import styled from "styled-components";
 
 //Components
-import Home from "./Home";
-import CoinDetails from "./shared/CoinDetails";
-import AboutUs from "./AboutUs";
-import Watchlist from "./Watchlist";
+import Home from "../pages/Home";
+import CoinDetails from "../pages/CoinDetails";
+import AboutUs from "../pages/AboutUs";
+import Watchlist from "../pages/Watchlist";
+
 
 const Div = styled.div`
   color: #fff;
@@ -20,7 +21,7 @@ const Div = styled.div`
   }
 `;
 
-const Main = () => {
+const Routers = () => {
   return (
     <Div>
       <Routes>
@@ -35,4 +36,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Routers;

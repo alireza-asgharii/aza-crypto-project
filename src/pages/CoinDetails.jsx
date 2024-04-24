@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDetails } from "../../redux/coinDetails/detailsAction";
+import { fetchDetails } from "../redux/coinDetails/detailsAction";
 
 //Styles
-import styles from "../../styles/CoinDetails.module.scss";
+import styles from "../styles/CoinDetails.module.scss";
 
 //Components
-import IconBreadcrumbs from "./IconBreadcrumbs";
+import IconBreadcrumbs from "../components/modules/IconBreadcrumbs";
 
 //Icons
 import { BsQuestionCircle } from "react-icons/bs";
@@ -34,18 +34,18 @@ import {
   toFixed,
   toLocaleS,
   upDown,
-} from "../../helper/function";
+} from "../helper/function";
 
 //Skeleton Loading
-import CoinDetailsSkeleton from "../../loading/CoinDetailsSkeleton";
+import CoinDetailsSkeleton from "../loading/CoinDetailsSkeleton";
 import { Skeleton } from "@mui/material";
 
 //Chartjs
-import ChartCoin from "./ChartCoin";
+import ChartCoin from "../components/modules/ChartCoin";
 import axios from "axios";
 
 //Context
-import { LoadingBarRef } from "../../App";
+import { LoadingBarRef } from "../App";
 
 const CoinDetails = () => {
   const ref = useContext(LoadingBarRef);

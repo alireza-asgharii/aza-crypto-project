@@ -5,7 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://api.coingecko.com';
+axios.defaults.baseURL = import.meta.env.VITE_BASE_USRL;
 
 axios.interceptors.response.use((response) => {
   return response.data;

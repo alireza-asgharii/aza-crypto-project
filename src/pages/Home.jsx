@@ -13,11 +13,11 @@ import styles from "../styles/home.module.scss";
 import { LoadingBarRef } from "../App";
 
 //Components
-import PaginationCom from "./shared/PaginationCom";
+import PaginationCom from "../components/modules/PaginationCom";
 
 //Skeleton Lading
 import TableSkeleton from "../loading/TableSkeleton";
-import CoinTr from "./shared/CoinTr";
+import CoinTr from "../components/modules/CoinTr";
 
 
 const Home = () => {

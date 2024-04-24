@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import TableSkeleton from "../loading/TableSkeleton";
-import CoinTr from "./shared/CoinTr";
+import CoinTr from "../components/modules/CoinTr";
 
 //Context
 import { MarkedContext } from "../context/MarkedContextProvider";

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 //Styles
-import styles from "../styles/footer.module.scss";
+import styles from "../../styles/footer.module.scss";
 
 const Footer = () => {
   return (
