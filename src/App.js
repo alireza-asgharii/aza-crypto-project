@@ -24,6 +24,7 @@ function App() {
 
   return (
     <div>
+      
       <LoadingBarRef.Provider value={ref}>
         <LoadingBar color="#2998ff" ref={ref} />
           <Provider store={store}>
