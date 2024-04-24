@@ -11,7 +11,7 @@ import { RiArrowUpSFill, RiArrowDownSFill } from "react-icons/ri";
 import { checkStar, splitName, toFixed, toLocaleS, upDown } from "../../helper/function";
 
 // Chartjs
-import Chart7d from ".//Chart7d";
+import Chart7d from "./Chart7d";
 
 //Context
 import { MarkedContext } from "../../context/MarkedContextProvider";
