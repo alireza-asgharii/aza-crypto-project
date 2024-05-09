@@ -14,7 +14,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "axios": "^1.6.8",
-    "bootstrap": "^5.2.1",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",
     "date-fns": "^2.29.3",
@@ -37,8 +36,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "serve": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest",
     "test:coverage": "vitest run --coverage --watch=false"
   },

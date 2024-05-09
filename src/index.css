@@ -24,3 +24,25 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: rgba(65, 62, 62, 0.695);
 }
+
+@layer components {
+  .tdStyle {
+    @apply px-3
+  }
+
+  a {
+    @apply md:cursor-pointer cursor-default
+  }
+
+  .upDownIcon {
+    @apply text-[1.4rem] relative top-[-1xp] left-[3px]
+  }
+
+  .downColor {
+    @apply text-[#ca343f]
+  }
+
+  .upColor {
+    @apply text-[#16bf80]
+  }
+}

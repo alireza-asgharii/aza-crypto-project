@@ -35,10 +35,11 @@ const Chart7d = ({ data, upDown }) => {
 
   return (
     <>
-      {src && <img src={src} alt="chart" width={170} height="100%" />}
+      {src && <img src={src} alt="chart" width='170' height='auto' />}
 
       <Line
         style={{ display: "none" }}
+        className="hidden"
         id={`canvas${data.name.split(" ")[0]}`}
         data={{
           labels: Array(data.sparkline_in_7d.price.length).fill("-"),
@@ -78,7 +79,7 @@ const Chart7d = ({ data, upDown }) => {
           hoverRadius: 12,
           plugins: {
             decimation: {
-              enabled: true
+              enabled: true,
             },
             legend: {
               display: false,

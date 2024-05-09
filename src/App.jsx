@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
 
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import LoadingBar from "react-top-loading-bar";

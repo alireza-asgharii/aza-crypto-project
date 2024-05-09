@@ -9,7 +9,7 @@ const TableSkeleton = (props) => {
       {Array(props.length)
         .fill(0)
         .map((item, i) => (
-          <tr className={styles.coinRow} key={i}>
+          <tr className='border-y-[#222531] border-y-[1px] bg-inherit text-sm [&_td]:py-[10px] [&_td]:px-[11px] md:[&_td]:py-[25px] md:[&_td]:px-[11px] hover:bg-[#171924] transition-colors' key={i}>
             <td className={styles.sticky}>
               <Skeleton variant="circular" animation='wave' width={20} height={20} sx={{bgcolor: 'grey.900'}}/>
             </td>
