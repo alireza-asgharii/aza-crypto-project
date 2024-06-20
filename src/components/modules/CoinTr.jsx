@@ -54,7 +54,7 @@ const CoinTr = ({ coin }) => {
         )}
       </td>
       <td className="tdStyle md:table-cell hidden">{coin.market_cap_rank}</td>
-      <td className="tdStyle text-center font-semibold sticky left-[36px] z-10 bg-inherit ">
+      <td className="tdStyle text-center font-semibold sticky md:left-[36px] left-[41px] z-10 bg-inherit ">
         <div className="flex items-center">
           <div className="w-7 h-7 mr-2">
             <img
