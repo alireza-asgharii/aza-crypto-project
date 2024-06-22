@@ -1,5 +1,3 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
 
 //Icons
@@ -11,34 +9,17 @@ import { toLocaleS, upDown } from "../../helper/function";
 //Styles
 import styles from "../../styles/globalData.module.scss";
 
-const GlobalData = () => {
-  const [globalData, setGlobalData] = useState({
-    isLoading: true,
-    data: [],
-    err: "",
-  });
+import { useGetGlobalData } from "../../hooks/useQueries";
 
-  useEffect(() => {
-    axios
-      .get("/api/v3/global")
-      .then((res) =>
-        setGlobalData({ err: false, data: res.data, isLoading: false })
-      )
-      .catch((err) =>
-        setGlobalData((prevState) => ({
-          ...prevState,
-          err: true,
-          isLoading: false,
-        }))
-      );
-  }, []);
+const GlobalData = () => {
+  const {data, isPending, isError} = useGetGlobalData()
 
   return (
     <>
-      <div className={styles.item}>
+      <div className={`${styles.item}`}>
         <span className={styles.name}>Cryptos:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data || globalData.err ? (
+          {isPending || !data?.data || isError ? (
             <Skeleton
               variant="rounded"
               width={38}
@@ -46,14 +27,14 @@ const GlobalData = () => {
               sx={{ bgcolor: "grey.800", marginTop: "2px" }}
             />
           ) : (
-            toLocaleS(globalData.data.active_cryptocurrencies)
+            toLocaleS(data?.data?.active_cryptocurrencies)
           )}
         </span>
       </div>
       <div className={styles.item}>
         <span className={styles.name}>Exchanges:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data || globalData.err ? (
+          {isPending || !data?.data || isError ? (
             <Skeleton
               variant="rounded"
               width={38}
@@ -61,14 +42,14 @@ const GlobalData = () => {
               sx={{ bgcolor: "grey.800", marginTop: "2px" }}
             />
           ) : (
-            toLocaleS(globalData.data.markets)
+            toLocaleS(data?.data?.markets)
           )}
         </span>
       </div>
       <div className={styles.item}>
         <span className={styles.name}>Market Cap:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data || globalData.err ? (
+          {isPending || !data?.data|| isError ? (
             <Skeleton
               variant="rounded"
               width={170}
@@ -77,20 +58,20 @@ const GlobalData = () => {
             />
           ) : (
             <>
-              ${toLocaleS(globalData.data.total_market_cap.usd)}
+              ${toLocaleS(data?.data?.total_market_cap.usd)}
               <span
                 className={`${styles.priceChange} ${
-                  upDown(globalData.data.market_cap_change_percentage_24h_usd)
+                  upDown(data?.data?.market_cap_change_percentage_24h_usd)
                     ? styles.greenChange
                     : styles.redChange
                 }`}
               >
-                {globalData.data.market_cap_change_percentage_24h_usd.toFixed(
+                {data?.data?.market_cap_change_percentage_24h_usd.toFixed(
                   2
                 )}
                 %
                 {upDown(
-                  globalData.data.market_cap_change_percentage_24h_usd
+                  data?.data?.market_cap_change_percentage_24h_usd
                 ) ? (
                   <RiArrowUpSFill className={styles.upDownIcons} />
                 ) : (
@@ -104,7 +85,7 @@ const GlobalData = () => {
       <div className={styles.item}>
         <span className={styles.name}>24h Vol:</span>
         <span className={styles.value}>
-          {globalData.isLoading || !globalData.data || globalData.err ? (
+          {isPending || !data?.data || isError ? (
             <Skeleton
               variant="rounded"
               width={120}
@@ -112,14 +93,14 @@ const GlobalData = () => {
               sx={{ bgcolor: "grey.800", marginTop: "2px" }}
             />
           ) : (
-            `$${toLocaleS(globalData.data.total_volume.usd)}`
+            `$${toLocaleS(data?.data.total_volume.usd)}`
           )}
         </span>
       </div>
       <div className={styles.item}>
         <span className={styles.name}>Dominance:</span>
         <span className={styles.value}>
-        {globalData.isLoading || !globalData.data || globalData.err ? (
+        {isPending || !data?.data || isError ? (
             <Skeleton
               variant="rounded"
               width={38}
@@ -127,7 +108,7 @@ const GlobalData = () => {
               sx={{ bgcolor: "grey.800", marginTop: "2px" }}
             />
           ) : (
-            `BTC: ${globalData.data.market_cap_percentage.btc.toFixed(2)}% ETH: ${globalData.data.market_cap_percentage.eth.toFixed(2)}%`
+            `BTC: ${data?.data.market_cap_percentage.btc.toFixed(2)}% ETH: ${data?.data.market_cap_percentage.eth.toFixed(2)}%`
           )}
           </span>
       </div>
