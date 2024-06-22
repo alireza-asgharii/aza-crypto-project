@@ -55,24 +55,24 @@ const Home = () => {
         )}
 
         <div className="w-full overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-          {(error || !Array.isArray(data)) && <Error />}
-          {!error &&
-            (Array.isArray(data) && (
-              <table className="w-full m-auto font-medium bg-[#17171a]">
-                <thead className="bg-[#17171a]">
-                  <TheadTr />
-                </thead>
-                <tbody className="bg-[#17171a] ">
-                  {isPending ? (
-                    <TableSkeleton length={10} />
-                  ) : (
-                    data &&
-                    !error &&
-                    data.map((item) => <CoinTr coin={item} key={item.id} />)
-                  )}
-                </tbody>
-              </table>
-            ))}
+          {error || (!Array.isArray(data) && !isPending && <Error />)}
+          {!error && (
+            <table className="w-full m-auto font-medium bg-[#17171a]">
+              <thead className="bg-[#17171a]">
+                <TheadTr />
+              </thead>
+              <tbody className="bg-[#17171a] ">
+                {isPending ? (
+                  <TableSkeleton length={10} />
+                ) : (
+                  data &&
+                  !error &&
+                  Array.isArray(data) &&
+                  data.map((item) => <CoinTr coin={item} key={item.id} />)
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
         {!error && <PaginationCom page={120} />}
       </div>
