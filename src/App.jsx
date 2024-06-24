@@ -7,7 +7,7 @@ import LoadingBar from "react-top-loading-bar";
 import Layout from "./layout/Layout";
 
 //raect query
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, keepPreviousData } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 //Routers component
@@ -24,6 +24,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 30 * 1000,
       retry: 1,
+      placeholderData: keepPreviousData,
     },
   },
 });
