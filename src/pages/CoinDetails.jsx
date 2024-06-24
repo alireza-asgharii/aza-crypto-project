@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchDetails } from "../redux/coinDetails/detailsAction";
+import { useSelector } from "react-redux";
 
 //Styles
 import styles from "../styles/CoinDetails.module.scss";
@@ -46,6 +45,7 @@ import axios from "axios";
 
 //Context
 import { LoadingBarRef } from "../App";
+import { useGetCoinDetails } from "../hooks/useQueries";
 
 const CoinDetails = () => {
   const ref = useContext(LoadingBarRef);
@@ -67,13 +67,6 @@ const CoinDetails = () => {
     maxSupply: false,
   });
 
-  //coinData
-  const dispatch = useDispatch();
-  const coinDetailsState = useSelector((state) => state.coinDetailsState);
-  const coinData = coinDetailsState.coinData;
-  const isLoadingCoinData = coinDetailsState.isLoading;
-  const coinDataError = coinDetailsState.error.isErr;
-
   //for MaxMin
   const [dataMaxMin, setDataMaxMin] = useState([]);
   const [minMaxLaoding, seMaxMinLoading] = useState(true);
@@ -82,8 +75,10 @@ const CoinDetails = () => {
   const { id } = useParams();
   const path = useLocation();
 
+  //coin details Query
+  const {data: coinData, isPending: isLoadingCoinData, isError: coinDataError} = useGetCoinDetails(id)
+
   useEffect(() => {
-    dispatch(fetchDetails(id));
     ref.current.complete();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -93,9 +88,10 @@ const CoinDetails = () => {
     document.documentElement.scrollTop = 0;
     axios
       .get(
-        `/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max&interval=''`
+        `/coins/${id}/market_chart?vs_currency=usd&days=180&interval=${""}&x_cg_demo_api_key=${import.meta.env.VITE_API_KEY}`
       )
       .then((res) => {
+        console.log(res)
         setDataMaxMin(res.prices);
         seMaxMinLoading(false);
         seMaxMinError(false);
@@ -144,7 +140,7 @@ const CoinDetails = () => {
       <div className={styles.breadcrumbsContainer}>
         <IconBreadcrumbs path={path} name={coinData?.name} />
       </div>
-      {coinData.length === 0 || isLoadingCoinData || coinDataError ? (
+      {isLoadingCoinData || coinDataError || !coinData ? (
         <CoinDetailsSkeleton />
       ) : (
         <section className={styles.topSection}>
@@ -180,7 +176,7 @@ const CoinDetails = () => {
                 </span>
               </span>
             </div>
-            <div className={styles.morePrice}>
+            <div className={`${styles.morePrice}`}>
               <div className={styles.priceItem}>
                 <p>
                   Market Cap
@@ -571,13 +567,13 @@ const CoinDetails = () => {
               >
                 1Y
               </span>
-              <span
+              {/* <span
                 onClick={selectedRangeHandler}
                 data-range="max"
                 className={range === "max" ? styles.selected : ""}
               >
                 MAX
-              </span>
+              </span> */}
             </div>
           )}
 
