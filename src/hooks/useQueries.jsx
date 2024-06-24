@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { fetchCoinsMarket, fetchGlobalData, fetchSearch, fetchTrandData } from "../services/queries";
+import { fetchCoinChart, fetchCoinDetails, fetchCoinsMarket, fetchGlobalData, fetchSearch, fetchTrandData } from "../services/queries";
 
 export const useGetCoinsMarket = (page) => {
   const res = useQuery({
@@ -48,6 +48,24 @@ export const useGetGlobalData = () => {
     queryKey: ["globalData"],
     queryFn: fetchGlobalData,
     placeholderData: keepPreviousData,
+  });
+
+  return res;
+};
+
+export const useGetCoinDetails = (id) => {
+  const res = useQuery({
+    queryKey: ["coindetails", id],
+    queryFn: () => fetchCoinDetails(id),
+  });
+
+  return res;
+};
+
+export const useGetCoinChart = (id, range) => {
+  const res = useQuery({
+    queryKey: ["coinChart", id, range],
+    queryFn: () => fetchCoinChart(id, range),
   });
 
   return res;
