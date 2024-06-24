@@ -38,7 +38,13 @@ export default function IconBreadcrumbs({ path, name }) {
         <CustomizedLink
           onClick={() => ref.current.continuousStart()}
           underline="hover"
-          sx={{ display: "flex", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            "@media (max-width:600px)": {
+              fontSize: "13px", // سایز فونت در موبایل
+            },
+          }}
           to="/"
         >
           <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
@@ -47,13 +53,27 @@ export default function IconBreadcrumbs({ path, name }) {
         <CustomizedLink
           onClick={() => ref.current.continuousStart()}
           underline="hover"
-          sx={{ display: "flex", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            "@media (max-width:600px)": {
+              fontSize: "13px", // سایز فونت در موبایل
+            },
+          }}
           to={`/${splitPath[1]}`}
         >
           <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
           {splitPath[1]}
         </CustomizedLink>
-        <Typography sx={{ display: "flex", alignItems: "center" }}>
+        <Typography
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            "@media (max-width:600px)": {
+              fontSize: "13px", // سایز فونت در موبایل
+            },
+          }}
+        >
           <MonetizationOnOutlinedIcon sx={{ mr: 0.5 }} fontSize="inherit" />
           {name !== undefined ? (
             name
