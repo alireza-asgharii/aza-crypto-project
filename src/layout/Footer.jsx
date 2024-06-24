@@ -66,7 +66,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.footerText}>
-        <span>Developed with &#128153; by Alireza Asghari</span>
+        <span>Made with &#128153; by <a href="https://github.com/alireza-asgharii" target="_blank">Alireza Asghari</a> </span>
       </div>
     </div>
   );
