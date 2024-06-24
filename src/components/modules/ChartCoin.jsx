@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "chartjs-adapter-date-fns";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchCoin } from "../../redux/coinChart/coinChartAction";
+
 
 //Chartjs
 import { Line } from "react-chartjs-2";
@@ -23,6 +22,7 @@ import {
   Legend,
   TimeScale,
 } from "chart.js";
+import { useGetCoinChart } from "../../hooks/useQueries";
 
 ChartJS.register(
   CategoryScale,
@@ -66,15 +66,13 @@ const footer = (tooltipItems) => {
 };
 
 const ChartCoin = ({ id, range }) => {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.coinChartState.coinChart);
-  const isLoading = useSelector((state) => state.coinChartState.isLoading);
-  const isError = useSelector((state) => state.coinChartState.error.isErr);
+  //Chart Query 
+  const {data, isLoading, isError} = useGetCoinChart(id, range)
 
   let x = [];
   let y = [];
 
-  if (data.prices) {
+  if (data?.prices) {
     for (let i of data.prices) {
       x.push(i[0]);
     }
@@ -82,12 +80,6 @@ const ChartCoin = ({ id, range }) => {
       y.push(i[1]);
     }
   }
-
-  useEffect(() => {
-    dispatch(fetchCoin(id, range));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range, id]);
-
   return (
     <>
       <div className={isLoading || isError ? styles.chartLoading : ""}>
